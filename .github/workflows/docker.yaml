@@ -28,3 +28,20 @@ jobs:
               with:
                 username: ${{ vars.DOCKERHUB_USERNAME }}
                 password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+            - name: build and push
+              uses:  docker/build-psuh-actions@v6
+              with:
+                push: false
+                tags: ${{ vars.DOCKERHUB_USERNAME }}/solar-system:${{ github.sha }}
+
+
+            - name: test docker image
+              run: |
+                docker images
+                docker run --name solar-system-app -d \
+                -p 3000:3000 \
+                -e MONGO_UIR=$
+
+
+            
