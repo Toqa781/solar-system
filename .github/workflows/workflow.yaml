@@ -10,7 +10,7 @@ on:
 env:
     MONGO_URI: 'mongodb+srv://supercluster.d83jj.mongodb.net/superData'
     MONGO_USERNAME: ${{ vars.MONGO_USERNAME }}
-    MONGO_PASSWORD: ${{ secrets.MONGO_PASSWPORD }}
+    MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
 
 jobs:
     unit-testing:
@@ -39,6 +39,12 @@ jobs:
 
             - name: unit testing
               run: npm test
+
+            # - name: Archive test result
+            #   uses: actions/upload-artifact@v4.6.2
+            #   with:
+            #     name: SP-Test-Result
+            #     path: test-results.xml
 
 
 
