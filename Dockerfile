@@ -1,16 +1,16 @@
-FROM node:18-alpine3.17
+FROM node:alpine3.21
 
-WORKDIR /usr/app
+WORKDIR /app
 
-COPY package*.json /usr/app/
+COPY package*json /app/
 
 RUN npm install
 
 COPY . .
 
-ENV MONGO_URI=uriPlaceholder
-ENV MONGO_USERNAME=usernamePlaceholder
-ENV MONGO_PASSWORD=passwordPlaceholder
+# ENV MONGO_URI=value
+# ENV MONGO_USERNAME=value
+# ENV MONGO_PASSWORD=value           will be passed at build
 
 EXPOSE 3000
 
