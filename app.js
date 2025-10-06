@@ -78,6 +78,29 @@ app.get('/ready',   function(req, res) {
         "status": "ready"
     });
 })
+// Health check endpoint
+app.get('/health', (req, res) => {
+  // Check MongoDB connection
+  const dbStatus = mongoose.connection.readyState === 1 ? 'connected' : 'disconnected';
+  
+  if (dbStatus === 'connected') {
+    res.status(200).json({
+      status: 'UP',
+      timestamp: new Date().toISOString(),
+      uptime: process.uptime(),
+      database: dbStatus,
+      service: 'solar-system',
+      version: '6.7.6'
+    });
+  } else {
+    res.status(503).json({
+      status: 'DOWN',
+      timestamp: new Date().toISOString(),
+      database: dbStatus,
+      service: 'solar-system'
+    });
+  }
+});
 
 app.listen(3000, () => {
     console.log("Server successfully running on port - " +3000);
