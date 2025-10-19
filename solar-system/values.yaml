@@ -1,0 +1,21 @@
+replicaCount: 2
+image:
+  repository: toqaabdalla/solar-system
+  tag: v1.0 
+
+service:
+  type: NodePort
+  port: 3000
+  targetPort: 3000
+
+resources:
+  requests:
+    memory: "128Mi"
+    cpu: "100m"
+  limits:
+    memory: "256Mi"
+    cpu: "200m"
+
+mongo: 
+  secret: "solar-secret"
+  configmap: "solar-cm"

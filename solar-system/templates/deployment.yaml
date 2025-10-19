@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-deploy
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}-container
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        env:
+          - name: MONGO_URI
+            valueFrom: 
+              configMapKeyRef:
+                name: {{ .Values.mongo.configmap }}
+                key: MONGO_URI
+          - name: MONGO_USERNAME
+            valueFrom: 
+              secretKeyRef:
+                name: {{ .Values.mongo.secret }}
+                key: MONGO_USERNAME
+          - name: MONGO_PASSWORD
+            valueFrom: 
+              secretKeyRef:
+                name: {{ .Values.mongo.secret }}
+                key: MONGO_PASSWORD
+        resources:
+          requests:
+            memory: "{{ .Values.resources.requests.memory }}"
+            cpu: "{{ .Values.resources.requests.cpu }}"
+          limits:
+            memory: "{{ .Values.resources.limits.memory }}"
+            cpu: "{{ .Values.resources.limits.cpu }}"
+        ports:
+        - containerPort: {{ .Values.service.targetPort }}
