@@ -78,10 +78,6 @@ app.get('/ready',   function(req, res) {
         "status": "ready"
     });
 })
-// Health check endpoint
-app.get('/health', (req, res) => {
-  // Check MongoDB connection
-  const dbStatus = mongoose.connection.readyState === 1 ? 'connected' : 'disconnected';
   
   if (dbStatus === 'connected') {
     res.status(200).json({
