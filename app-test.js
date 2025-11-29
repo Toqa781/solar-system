@@ -191,7 +191,7 @@ describe('Testing Other Endpoints', () => {
 
 describe('Health Check', () => {
   it('should return health status', (done) => {
-    chai.request(app)
+    chai.request(server)
       .get('/health')
       .end((err, res) => {
         expect(res).to.have.status(200);
