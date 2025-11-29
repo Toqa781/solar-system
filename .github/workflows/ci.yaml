@@ -12,10 +12,10 @@ jobs:
 
         steps:
             - name: Checkout Repository
-              uses: actions/checkout@v4
+              uses: actions/checkout@v6
 
             - name: Setup Node.js Environment
-              uses: actions/setup-node@v3
+              uses: actions/setup-node@v6.0.0
               with:
                 node-version: 18
 
@@ -30,5 +30,31 @@ jobs:
               with:
                 name: Mocha-Test-Result
                 path: test-results.xml
+    
+    code-coverage:
+        name: Code Coverage
+        needs: unit-testing
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v6
+
+            - name: Setup Node.js Environment
+              uses: actions/setup-node@v6.0.0
+              with:
+                node-version: 18
+
+            - name: Install Dependincies
+              run: npm install
+
+            - name: Generate coverage reports
+              run: npm run coverage
+              continue-on-error: true
+
+            - name: Archive Coverage Result
+              uses: actions/upload-artifact@v4
+              with:
+                name: Code-Coverage-Result
+                path: coverage
 
               
