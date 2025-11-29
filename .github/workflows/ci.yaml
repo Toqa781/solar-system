@@ -1,37 +1,24 @@
-name: My first workflow on GitHub Actions
-on: [push]
+name: CI pipeline for the solar-system app
+on: push
+
 jobs:
-    build:
+    unit-testing:
+        name: Unit Testing
         runs-on: ubuntu-latest
         steps:
-            - name: Install cowsay
-              run: sudo apt-get install cowsay -y
+            - name: Checkout Repository
+              uses: actions/checkout@v6
 
-            - name: Generate Ascii
-              run: cowsay -f dragon "Run for cover, I am a DRAGON....RAWR" >> dragon.txt
-
-            - name: Upload a Build Artifact
-              uses: actions/upload-artifact@v5.0.0
+            - name: Setup Node.js Environment
+              uses: actions/setup-node@v6.0.0
               with:
-                name: dragon-artifact
-                path: dragon.txt
+                node-version: 18
+                cache: 'npm'
 
-    test:
-        runs-on: ubuntu-latest
-        needs: build
-        steps:    
-            - name: Download a Build Artifact
-              uses: actions/download-artifact@v6.0.0
+            - name: Install Dependincies
+              run: npm install
 
-            - name: Test file exists
-              run: grep -i "dragon" dragon.txt
+            - name: Run Unit Testing
+              run: npm test
 
-    deploy:
-        runs-on: ubuntu-latest
-        needs: test
-        steps:
-            - name: Download a Build Artifact
-              uses: actions/download-artifact@v6.0.0
-            
-            - name: show
-              run: cat dragon.txt
+              
