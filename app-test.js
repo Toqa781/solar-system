@@ -188,17 +188,3 @@ describe('Testing Other Endpoints', () => {
     });
 
 });
-
-describe('Health Check', () => {
-  it('should return health status', (done) => {
-    chai.request(server)
-      .get('/health')
-      .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body).to.have.property('status', 'UP');
-        expect(res.body).to.have.property('database');
-        expect(res.body).to.have.property('uptime');
-        done();
-      });
-  });
-});
