@@ -25,3 +25,13 @@ jobs:
 
             - name: Test file exists
               run: grep -i "dragon" dragon.txt
+
+    deploy:
+        runs-on: ubuntu-latest
+        needs: test
+        steps:
+            - name: Download a Build Artifact
+              uses: actions/download-artifact@v6.0.0
+            
+            - name: show
+              run: cat dragon.txt
