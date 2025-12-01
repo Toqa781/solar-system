@@ -95,7 +95,7 @@ jobs:
               with:
                 image-ref: '${{ vars.DOCKERHUB_USERNAME }}/solar-system:${{ github.sha }}'
                 format: 'table'
-                exit-code: '0'
+                exit-code: '1'
                 ignore-unfixed: true
                 severity: 'CRITICAL'
 
