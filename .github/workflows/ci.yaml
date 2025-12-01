@@ -18,6 +18,12 @@ jobs:
               uses: actions/setup-node@v6.0.0
               with:
                 node-version: 18
+                
+            - name: Cache NPM dependencies
+              uses: actions/cache@v3
+              with:
+                path: node_modules
+                key: node-modules-${{ hashFiles('package-lock.json') }}
 
             - name: Install Dependincies
               run: npm install
@@ -44,6 +50,12 @@ jobs:
               with:
                 node-version: 18
 
+            - name: Cache NPM dependencies
+              uses: actions/cache@v3
+              with:
+                path: node_modules
+                key: node-modules-${{ hashFiles('package-lock.json') }}
+
             - name: Install Dependincies
               run: npm install
 
@@ -57,4 +69,5 @@ jobs:
                 name: Code-Coverage-Result
                 path: coverage
 
+   
               
