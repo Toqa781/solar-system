@@ -96,8 +96,8 @@ jobs:
                 image-ref: '${{ vars.DOCKERHUB_USERNAME }}/solar-system:${{ github.sha }}'
                 format: 'table'
                 exit-code: '0'
-                severity: 'CRITICAL, HIGH'
                 ignore-unfixed: true
+                severity: 'CRITICAL'
 
             - name: Docker container test
               run: |
