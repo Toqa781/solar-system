@@ -26,11 +26,5 @@ jobs:
       - name: Terraform init
         run: terraform init
 
-      - name: Download Terraform State
-        uses: actions/download-artifact@v6.0.0
-        with:
-          name: tfstate
-          path: .
-
       - name: Terraform Destroy
         run: terraform destroy -auto-approve
