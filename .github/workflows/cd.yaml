@@ -25,13 +25,13 @@ jobs:
               run: |
                 aws eks update-kubeconfig --name ${{ secrets.CLUSTER_NAME }} --region ${{ vars.REGION }}
 
-            - name: Setup kubectl
-              uses: statsig-io/kubectl-via-eksctl@main
-              env:
-                aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-                aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-                region: ${{ vars.REGION }}
-                cluster: ${{ secrets.CLUSTER_NAME }}
+            # - name: Setup kubectl
+            #   uses: statsig-io/kubectl-via-eksctl@main
+            #   env:
+            #     aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            #     aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            #     region: ${{ vars.REGION }}
+            #     cluster: ${{ secrets.CLUSTER_NAME }}
 
             - name: Helm tool installer
               uses: Azure/setup-helm@v4.3.1
